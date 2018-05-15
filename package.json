@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate.git"
+    "url": "https://github.com/ninayujiri/chattyApp"
   },
   "keywords": [
     "react",
@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/noahlotzer/react-simple-boilerplate/issues"
   },
-  "homepage": "https://github.com/noahlotzer/react-simple-boilerplate",
+  "homepage": "https://github.com/ninayujiri/chattyApp",
   "engines": {
     "node": ">=6.0.0"
   },
