@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ChatBar from "./ChatBar.jsx";
 import MessageList from './MessageList.jsx';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -23,15 +22,24 @@ class App extends Component {
     };
   }
 
-  createNewMessage = newMessageInput => {
+  addMessage = newMessageInput => {
     const newMessage = {
-      id: this.state.messages.length + 1,
       username: this.state.currentUser.name,
       content: newMessageInput
     };
-    const messages = this.state.messages.concat(newMessage);
-    this.setState({messages: messages});
+
+    this.socket.send(JSON.stringify(newMessage));
+
+    // const messages = this.state.messages.concat(newMessage);
+    // this.setState({messages: messages});
   };
+
+  componentDidMount() {
+    // Opens Websocket connection
+    this.socket = new WebSocket("ws://localhost:3001");
+    // When connected, console.log
+    this.socket.onopen = () => console.log('Connected to server');
+  }
 
   render() {
     return (
@@ -40,7 +48,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty 👋</a>
         </nav>
 
-        <ChatBar currentUser={this.state.currentUser} createNewMessage={this.createNewMessage}/>
+        <ChatBar currentUser={this.state.currentUser} addMessage={this.addMessage}/>
         <MessageList messages={this.state.messages} />
 
       </div>
