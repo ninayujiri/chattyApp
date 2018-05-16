@@ -10,7 +10,7 @@ class MessageList extends Component {
       console.log('data', data);
       return data.type === 'incomingNotification' ? (<Notification
           key={data.id}
-          username={data.username}
+          username={data.oldUsername}
           newUsername={data.username}
         />) : (<Message
           key={data.id}

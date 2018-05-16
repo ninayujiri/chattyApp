@@ -4,7 +4,7 @@ class ChatBar extends Component {
 
   handleUsername = event => {
     if(event.key === 'Enter'){
-      this.props.updateUsername(event.target.value);
+      this.props.updateUsername(event.target.value, this.props.username);
     }
   }
 
@@ -21,7 +21,7 @@ class ChatBar extends Component {
         <footer className="chatbar">
           <input
             className="chatbar-username"
-            defaultValue={this.props.currentUser.username}
+            defaultValue={this.props.username}
             onKeyPress={this.handleUsername}
           />
           <input
