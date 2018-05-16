@@ -1,16 +1,20 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,500");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
+// variables
+$bluegrey: #39444d;
+$lightgrey: #fafafa;
+
 body {
-  background: white;
+  background: $lightgrey;
   color: black;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 15px;
   margin: 70px 0;
 }
 
 .chatbar {
-  background: tomato;
+  background: $bluegrey;
   bottom: 0;
   display: flex;
   left: 0;
@@ -26,6 +30,9 @@ body {
   line-height: 40px;
   margin: 5px;
   padding: 0 9px;
+  border: none;
+  border-radius: 3px;
+
 }
 
 .chatbar-message {
@@ -63,7 +70,7 @@ body {
 }
 
 .navbar {
-  background: tomato;
+  background: $bluegrey;
   height: 60px;
   left: 0;
   padding: 0 10px;
@@ -73,10 +80,10 @@ body {
 }
 
 .navbar-brand {
-  color: inherit;
+  color: #fafafa;
   display: block;
   float: left;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 28px;
   height: 60px;
   line-height: 60px;
