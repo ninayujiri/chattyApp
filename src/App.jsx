@@ -6,23 +6,28 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name: "Bob"},
+      currentUser: {username: "Bob"},
       messages: []
     };
   }
 
   updateUsername = newUserInput => {
     console.log('newUserInput: ', newUserInput)
-    const newUser = { name: newUserInput};
+    const newUser = {
+      type: "postNotification",
+      username: newUserInput
+    };
     this.setState({currentUser: newUser})
-    // this.socket.send(JSON.stringify(newUser));
+    this.socket.send(JSON.stringify(newUser));
   }
 
   addMessage = newMessageInput => {
     const newMessage = {
-      username: this.state.currentUser.name,
+      type: "postMessage",
+      username: this.state.currentUser.username,
       content: newMessageInput
     };
+    console.log('newMessage: ', newMessage);
     this.socket.send(JSON.stringify(newMessage));
   };
 
@@ -35,9 +40,27 @@ class App extends Component {
 
     // Handles the incoming message
     this.socket.onmessage = (event) => {
-      console.log(event);
-      const messages = JSON.parse(event.data);
-      this.setState(prevState => ({ messages: [...prevState.messages, messages]}));
+
+      // console.log(event);
+
+      const parsedEvent = JSON.parse(event.data);
+      // console.log('parsed event:', parsedEvent);
+
+      switch(parsedEvent.type) {
+        case "incomingMessage":
+          console.log(1, parsedEvent);
+          const messages = parsedEvent;
+          this.setState(prevState => ({ messages: [...prevState.messages, messages]}));
+          break;
+        case "incomingNotification":
+          console.log(2, parsedEvent);
+          const notification = parsedEvent;
+          this.setState(prevState => ({ messages: [...prevState.messages, notification]}));
+
+          break;
+        default:
+          throw new Error("Unknown event type " + data.type);
+      }
     }
   }
 

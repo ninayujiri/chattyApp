@@ -21,7 +21,7 @@ class ChatBar extends Component {
         <footer className="chatbar">
           <input
             className="chatbar-username"
-            defaultValue={this.props.currentUser.name}
+            defaultValue={this.props.currentUser.username}
             onKeyPress={this.handleUsername}
           />
           <input

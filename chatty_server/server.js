@@ -25,7 +25,16 @@ wss.on('connection', (ws) => {
   ws.on('message', (incomingMsg) => {
     const parsedMsg = JSON.parse(incomingMsg);
     const uuid = uuidv4();
-    parsedMsg.id = uuid;
+
+    if(parsedMsg.type === "postMessage") {
+      parsedMsg.id = uuid;
+      parsedMsg.type = "incomingMessage";
+    }
+    else if(parsedMsg.type === "postNotification") {
+      parsedMsg.id = uuid;
+      parsedMsg.type = "incomingNotification";
+    }
+
     const returnMsg = JSON.stringify(parsedMsg);
     console.log('received: %s', returnMsg);
 

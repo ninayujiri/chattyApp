@@ -1,22 +1,27 @@
 import React, {Component} from 'react';
 import Message from './Message.jsx';
+import Notification from './Notification.jsx';
 
 
 class MessageList extends Component {
   render() {
 
-    const messageComponent = this.props.messages.map((message) => {
-      return(
-        <Message key={message.id} username={message.username} content={message.content}/>
-      );
-    });
+    const messageComponent = this.props.messages.map(data => {
+      console.log('data', data);
+      return data.type === 'incomingNotification' ? (<Notification
+          key={data.id}
+          username={data.username}
+          newUsername={data.username}
+        />) : (<Message
+          key={data.id}
+          username={data.username}
+          content={data.content}
+        />);
+    })
 
     return (
       <main className="messages">
         {messageComponent}
-        <div className="message system">
-          Anonymous1 changed their name to nomnom.
-        </div>
       </main>
     );
   }
