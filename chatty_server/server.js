@@ -19,16 +19,31 @@ const wss = new SocketServer({ server });
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
+  const colors = ['#4A849F', '#1B3440', '#B4D6C6', '#F2845C', '#E4523B', '#0A454D', '#3DB296', '#ECC417', '#E8931E']
+
+  function getIndex(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
+  let randomIndex = getIndex(9);
+  // console.log('randomIndex: ', randomIndex);
+
+  let customColor = colors[randomIndex];
+
+  const userColor = {
+    type: 'color',
+    color: customColor
+  }
+
+  console.log('userColor: ', userColor);
+  ws.send(JSON.stringify(userColor));
+
   let numberOfUsers = wss.clients.size;
 
   const userConnect = {
     type: "userConnect",
     userCount: numberOfUsers
   }
-
-  console.log('userConnect: ', userConnect);
-  console.log('numberOfUsers:', numberOfUsers);
-
 
   // Display online users count
   wss.clients.forEach(function each(client) {
@@ -37,7 +52,7 @@ wss.on('connection', (ws) => {
     }
   });
 
-  // Handle all posted messages/ notifications
+  // Update online user count when someone comes online
   ws.on('message', (incomingMsg) => {
     const parsedMsg = JSON.parse(incomingMsg);
     const uuid = uuidv4();
@@ -64,7 +79,6 @@ wss.on('connection', (ws) => {
         client.send(returnMsg);
       }
     });
-
   });
 
   // Set up a callback for when a client closes the socket
@@ -78,6 +92,7 @@ wss.on('connection', (ws) => {
 
     console.log('userDisconnect: ', userDisconnect);
 
+    // Update online user count after a user disconnects
     wss.clients.forEach(function each(client) {
       if (client.readyState === ws.OPEN) {
         client.send(JSON.stringify(userDisconnect));

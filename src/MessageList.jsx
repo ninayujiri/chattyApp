@@ -16,6 +16,7 @@ class MessageList extends Component {
           key={data.id}
           username={data.username}
           content={data.content}
+          color={data.color}
         />);
     })
 

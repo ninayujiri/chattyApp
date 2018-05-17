@@ -26,7 +26,8 @@ class App extends Component {
     const newMessage = {
       type: "postMessage",
       username: this.state.currentUser.username,
-      content: newMessageInput
+      content: newMessageInput,
+      color: this.state.color
     };
     this.socket.send(JSON.stringify(newMessage));
   };
@@ -54,9 +55,14 @@ class App extends Component {
         case "userConnect":
           let numberOfUsers = parsedEvent.userCount;
           this.setState({ userCount: numberOfUsers })
+          break;
         case "userDisconnect":
           numberOfUsers = parsedEvent.userCount;
           this.setState({ userCount: numberOfUsers });
+          break;
+        case "color":
+          console.log('parsed color: ', parsedEvent.color);
+          this.setState({ color: parsedEvent.color });
         // default:
         //   throw new Error("Unknown event type");
       }
@@ -72,7 +78,7 @@ class App extends Component {
         </nav>
 
         <ChatBar username={this.state.currentUser.username} addMessage={this.addMessage} updateUsername={this.updateUsername} />
-        <MessageList messages={this.state.messages} />
+        <MessageList messages={this.state.messages} color={this.state.color} />
 
       </div>
     );
