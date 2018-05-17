@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {username: "Bob"},
+      currentUser: {username: "Anonymous"},
       messages: []
     };
   }
@@ -42,12 +42,8 @@ class App extends Component {
 
     // Handles the incoming message
     this.socket.onmessage = (event) => {
-
       // console.log(event);
-
       const parsedEvent = JSON.parse(event.data);
-      // console.log('parsed event:', parsedEvent);
-
       switch(parsedEvent.type) {
         case "incomingMessage":
           const messages = parsedEvent;
