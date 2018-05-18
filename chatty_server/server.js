@@ -1,6 +1,8 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const uuidv4 = require('uuid/v4');
+// const querystring = require('querystring');
+const fetch = require('node-fetch');
 
 
 // Set the port to 3001
@@ -19,6 +21,7 @@ const wss = new SocketServer({ server });
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
+  // Assigns a random color to each user when they connect
   const colors = ['#4A849F', '#1B3440', '#B4D6C6', '#F2845C', '#E4523B', '#0A454D', '#3DB296', '#ECC417', '#E8931E']
 
   function getIndex(max) {
@@ -26,8 +29,6 @@ wss.on('connection', (ws) => {
   }
 
   let randomIndex = getIndex(9);
-  // console.log('randomIndex: ', randomIndex);
-
   let customColor = colors[randomIndex];
 
   const userColor = {
@@ -35,7 +36,7 @@ wss.on('connection', (ws) => {
     color: customColor
   }
 
-  console.log('userColor: ', userColor);
+  // Send user color upon connection
   ws.send(JSON.stringify(userColor));
 
   let numberOfUsers = wss.clients.size;
@@ -52,7 +53,7 @@ wss.on('connection', (ws) => {
     }
   });
 
-  // Update online user count when someone comes online
+  // Recieve message, parse, add a unique id and send back
   ws.on('message', (incomingMsg) => {
     const parsedMsg = JSON.parse(incomingMsg);
     const uuid = uuidv4();
@@ -83,14 +84,13 @@ wss.on('connection', (ws) => {
 
   // Set up a callback for when a client closes the socket
   ws.on('close', () => {
-    numberOfUsers = wss.clients.size;
     console.log('Client disconnected')
+
+    numberOfUsers = wss.clients.size;
     const userDisconnect = {
       type: "userDisconnect",
       userCount: numberOfUsers
     }
-
-    console.log('userDisconnect: ', userDisconnect);
 
     // Update online user count after a user disconnects
     wss.clients.forEach(function each(client) {
@@ -98,6 +98,5 @@ wss.on('connection', (ws) => {
         client.send(JSON.stringify(userDisconnect));
       }
     });
-
   });
 });
