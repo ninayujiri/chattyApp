@@ -1,7 +1,7 @@
 Chatty App
 =====================
 
-A single-age chat app that allows users to send messages and images to each other in real time. Users can chat anonymously or under a chosen username. Chatty also displays the number of people who are online at any given moment, so users can see if their messages are being seen by others.
+A single-page chat app that allows users to send messages and images to each other in real time. Users can chat anonymously or with a chosen username. Chatty also displays the number of people who are online at any given moment, so users can see if their messages are being seen by others.
 
 Chatty uses React, and communicates with a server via WebSockets.
 
