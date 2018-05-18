@@ -1,9 +1,14 @@
 Chatty App
 =====================
 
-A simple chat app that allows users to communicate with each other in real time, and without having to register accounts. It also displays the number of users who are online at any given time, so users can see if their messages are being seen by others.
+A single-age chat app that allows users to send messages and images to each other in real time. Users can chat anonymously or under a chosen username. Chatty also displays the number of people who are online at any given moment, so users can see if their messages are being seen by others.
 
 Chatty uses React, and communicates with a server via WebSockets.
+
+
+## Final Product
+
+!["GIF of Process"](https://github.com/ninayujiri/chattyApp/blob/master/docs/chatty.gif?raw=true)
 
 
 ### Getting Started
