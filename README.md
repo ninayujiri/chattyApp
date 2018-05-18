@@ -15,8 +15,9 @@ Chatty uses React, and communicates with a server via WebSockets.
 
 1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm run local` command. The app will be served at http://localhost:3000/.
-4. Go to http://localhost:3000/ in your browser.
+3. Start the local server using the `npm start` command.
+4. In a new terminal, `cd` into the chatty_server directory and start the websocket server using the `npm start` command.
+5. Go to http://localhost:3000/ in your browser.
 
 
 ### Dependencies
