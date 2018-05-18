@@ -77,7 +77,8 @@ body {
 }
 
 .navbar-brand {
-  color: #fafafa;
+  font-family: 'Work Sans', sans-serif;
+  color: $lightgrey;
   display: block;
   float: left;
   font-weight: 500;
@@ -93,6 +94,6 @@ body {
   font-size: 14px;
   margin-top: 1.5em;
   margin-right: 1em;
-  color: white;
+  color: $lightgrey;
   float: right;
 }
